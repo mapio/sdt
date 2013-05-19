@@ -42,6 +42,28 @@ syntax: glob
 .DS_Store
 EOF
 
+cat >/home/vagrant/.inputrc << EOF
+# silence!
+set bell-style none
+
+# be 8 bit clean
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# Mac OSX filenames
+set completion-ignore-case on
+
+# misc
+"\e[3~": delete-char
+"\C-h": backward-delete-char
+"\e[6~": history-search-forward
+"\e[5~": history-search-backward
+
+# python
+Tab: complete
+EOF
+
 chown vagrant:vagrant /home/vagrant/.hg*
 
 su vagrant -c 'hg clone git://github.com/mapio/sdt.git'
