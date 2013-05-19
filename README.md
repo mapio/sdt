@@ -26,9 +26,9 @@ in una directory vuota a vostro piacimento impartite i seguenti comandi:
 ```bash
 	curl -sLO https://raw.gith ub.com/mapio/sdt/master/Vagrantfile
 	vagrant up
-	vagrant reload --no-provision
-	vagrant vbguest --no-provision
-	vagrant reload --no-provision
+	vagrant reload
+	vagrant vbguest
+	vagrant reload
 ```
 
 dove il primo comando può essere sostituito con qualunque altro modo di salvare in un file di nome

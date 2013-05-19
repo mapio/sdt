@@ -1,5 +1,7 @@
 $script = <<SCRIPT
 
+if ! [ -r /.sdt-provisioned ]; then
+
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get -q -y dist-upgrade
@@ -43,6 +45,10 @@ EOF
 chown vagrant:vagrant /home/vagrant/.hg*
 
 su vagrant -c 'hg clone git://github.com/mapio/sdt.git'
+
+touch /.sdt-provisioned
+
+fi
 
 SCRIPT
 
