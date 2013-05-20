@@ -1,0 +1,23 @@
+#!/usr/bin/env jython
+
+from com.sun.jdi import Bootstrap
+
+vmm = Bootstrap.virtualMachineManager()
+conn = vmm.attachingConnectors()[ 0 ]
+args = conn.defaultArguments()
+args['port'].setValue( 8000 )
+vm = conn.attach( args )
+worker_field = vm.classesByName( 'ThreadTest$Worker' )[ 0 ].fieldByName( 'counter' )
+counter_field = vm.classesByName( 'ThreadTest$SyncronizedCounter' )[ 0 ].fieldByName( 'counter' )
+
+while True:
+	for t in vm.allThreads():
+		if t.name().startswith( 'Thread-' ):
+			t.suspend()
+			for f in t.frames():
+				to = f.thisObject()
+				if 'ThreadTest$Worker' in to.toString():
+					print t.name(), to.getValue( worker_field ).getValue( counter_field )
+					break
+			t.resume()
+	print
