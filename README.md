@@ -30,8 +30,8 @@ Once a basic Vagrant setup has been reached, move to an empty directory of your 
 where the first command can be replaced by any other methof of saving in a file named
 `Vagrantfile` the content at URL https://raw.github.com/mapio/sdt/master/Vagrantfile.
 
-If non errors are encountered, you can connect to the virtual machine with the
-command `vagrant ssh`; please not that in the home directory of the guest
+If no errors are encountered, you can connect to the virtual machine with the
+command `vagrant ssh`; please note that in the home directory of the guest
 (virutal) system you'll find a `sdt` subdirectory containing a *clone* of this
 repository and that under `/vagrant` is mounted the directory of the host
 system where you have downloaded the file `Vagrantfile` (and run the various
