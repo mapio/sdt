@@ -1,4 +1,4 @@
-#$script = <<SCRIPT
+$script = <<SCRIPT
 
 export DEBIAN_FRONTEND=noninteractive
 
