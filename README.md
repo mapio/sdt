@@ -17,7 +17,7 @@ To setup such image you'll need to:
 Once a basic Vagrant setup has been reached, move to an empty directory of your choice and give the following commands:
 
 ```bash
-	curl -sLO https://raw.gith ub.com/mapio/sdt/master/Vagrantfile
+	curl -sLO https://raw.github.com/mapio/sdt/master/Vagrantfile
 	vagrant up
 	vagrant reload
 	vagrant vbguest
