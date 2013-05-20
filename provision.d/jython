@@ -1,0 +1,11 @@
+curl -sL http://search.maven.org/remotecontent?filepath=org/python/jython-installer/2.5.3/jython-installer-2.5.3.jar > /tmp/ji.jar
+
+java -jar /tmp/ji.jar -s -d /usr/lib/jython/2.5.3
+
+rm -f /tmp/ji.jar
+
+ln -s /usr/lib/jython/2.5.3/bin/jython /usr/local/bin/
+
+cat >/home/vagrant/.jython <<-EOF
+	python.cachedir="/home/vagrant/.jython-cachedir"
+EOF

@@ -1,0 +1,3 @@
+apt-get -q -y update
+apt-get -q -y dist-upgrade
+rm -f /home/vagrant/postinstall.sh
