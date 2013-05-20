@@ -1,8 +1,11 @@
 Systematic Debugging Techniques
 ===============================
 
+![CC SA3.0](http://i.creativecommons.org/l/by-sa/3.0/88x31.png)
+
 This repository contains the support material related to the PhD class
-[Systematic Debugging Techniques](http://santini.di.unimi.it/d/sdt/).
+[Systematic Debugging Techniques](http://santini.di.unimi.it/d/sdt/) and is
+licensed under a ` Creative Commons Attribution-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-sa/3.0/deed.en_US>`_.
 
 To practice with the provided code requires the installation and configuration
 of several software tools; in order to help students in such task, a *virtual
@@ -12,7 +15,7 @@ To setup such image you'll need to:
 
 * download and install [VirtualBox](https://www.virtualbox.org/), following the [instructions](https://www.virtualbox.org/manual/ch02.html) (there is no need to intsall the *extension pack*);
 * download and install [Vagrant](http://www.vagrantup.com/), following the [instructions](http://docs.vagrantup.com/v2/installation/index.html);
-* install the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest), by entering (at the operating system *shell* prompt) the command `vagrant plugin install vagrant-vbguest`.
+* install the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest), by entering at the operating system *shell* prompt: `vagrant plugin install vagrant-vbguest`.
 
 Once a basic Vagrant setup has been reached, move to an empty directory of your choice and give the following commands:
 
