@@ -4,7 +4,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 if ! [ -r /.sdt-updated ]; then
 
-	apt-get update
+	apt-get -q -y update
 	apt-get -q -y dist-upgrade
 	touch /.sdt-updated
 
@@ -14,6 +14,25 @@ if ! [ -r /.sdt-python3 ]; then
 
 	apt-get install -y curl python-dev python-setuptools python3 python3-dev
 	touch /.sdt-python3
+
+fi
+
+if ! [ -r /usr/lib/jvm/java-7-oracle/jre/bin/java ]; then
+
+	apt-get -y install python-software-properties
+	add-apt-repository -y ppa:webupd8team/java
+	apt-get -q -y update
+
+	echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+	echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+
+	apt-get -y install oracle-java7-installer
+
+fi
+
+if ! [ -r  ]; then
+
+	curl -sLO 'http://search.maven.org/remotecontent?filepath=org/python/jython-installer/2.5.3/jython-installer-2.5.3.jar'
 
 fi
 
@@ -109,5 +128,6 @@ Vagrant.configure("2") do |config|
     sdt.vbguest.auto_update = false
     sdt.vm.network :forwarded_port, guest: 8000, host: 8000
     sdt.vm.provision :shell, :inline => $script
+    sdt.ssh.forward_x11 = true
   end
 end
