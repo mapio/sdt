@@ -5,7 +5,7 @@ Systematic Debugging Techniques
 
 This repository contains the support material related to the PhD class
 [Systematic Debugging Techniques](http://santini.di.unimi.it/d/sdt/) and is
-licensed under a ` Creative Commons Attribution-ShareAlike 3.0 Unported License <http://creativecommons.org/licenses/by-sa/3.0/deed.en_US>`_.
+licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unported License](http://creativecommons.org/licenses/by-sa/3.0/deed.en_US>).
 
 To practice with the provided code requires the installation and configuration
 of several software tools; in order to help students in such task, a *virtual
