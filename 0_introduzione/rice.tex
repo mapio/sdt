@@ -4,7 +4,7 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage{textcomp}
-\usepackage[italian]{babel}
+\usepackage[english]{babel}
 
 \usepackage{amsmath,amssymb,latexsym}
 
@@ -23,7 +23,7 @@
 
 % document
 
-\title{Rice e Kleene in Python}
+\title{An informal proof of Rice and Kleene theorems in Python}
 \author{Massimo Santini} % \date{}
 
 \begin{document}
@@ -31,61 +31,65 @@
 \maketitle
 
 \begin{abstract}
-Obiettivo di questi appunti è offrire una dimostrazione informale dei teoremi
-di Rice e Kleene basate sull'uso del linguaggio Python, piuttosto che su
-formalismi quali le macchine di Turing, i sistemi di programmazione accetabili,
-o le funzioni ricorsive parziali.
+
+In this note we give an informal proof of Rice and Kleene theorems based on
+the use of Python programming language instead of on formal systems like
+Turing machines, or partial recursive functions.
+
 \end{abstract}
 
-\section*{Nozioni preliminari}
+\section*{Preliminary notions}
 
-In queste note restringeremo l'attenzione a \emph{funzioni} del linguaggio
-Python che operano su \emph{stringhe} nel senso che sia i loro parametri che i
-valori che restituiscono, nel caso la loro esecuzione termini, sono di tipo
-\verb|str|; per semplificare la notazione, nel seguito useremo le lettere
-minuscole $F, G, \ldots$ per indicare \emph{funzioni} mentre le lettere
-minuscole $f, g, \ldots$ per indicare il \emph{codice sorgente} delle
-medesime. Ad esempio, se $f$ corrisponde a:
+Here we restrict our attention to Python \emph{functions} that work on
+\emph{string} in the sense that their parameters and return values (in case of
+\emph{termination}\footnote{A function is said to terminate, on a given input,
+if its execution requires a finite number of steps; on the other hand, it does
+not terminate if, for instance, it enters an infinite loop.}) are of
+\verb|str| type; to simplify the notation, in the following  we use uppercase
+letters $F, G, \ldots$ to denote the functions and lowercase letters $f, g,
+\ldots$ to denote their \emph{source code}. For instance, if $f$ is:
 
 \begin{pycode}
 def F( x ):
 	return 2 * x
 \end{pycode}
 
-intenderemo con $F$ la funzione che, data una stringa come parametro,
-restuisce la stringa ottenuta concatenando il paraetro con se stesso, ad
-esempio $F(\text{'ciao'})=\text{'ciaociao'}$. Diremo che due funzioni $F$ e
-$G$ hanno lo stesso comportamento, in simboli
+we denote with $F$ the function that, given a string as a parameter, returns
+the string obtained concatenating the value of the parameter with itself; for
+example $F(\text{'hello'})=\text{'hellohello'}$.
+
+We say that two functions $F$ and $G$ have the \emph{same behavior}, in
+symbols
 
 \[
 	F( x ) \equiv G( x )
 \]
 
-se e solo se per tutti i valori dei parametro $x$ per cui $F(x)$ termina,
-$G(x)$ termina anch'essa e $F(x)=G(x)$; useremo la stessa notazione anche dato
-il codice sorgente, ossia scriveremo
+if and only if for every value of $x$ such that $F(x)$ terminates, $G(x)$ also
+terminates and $F(x)=G(x)$; abusing the notation, we use it also for source
+code, that is, by
 
 \[
   f \equiv g
 \]
 
-per indicare che $F( x ) \equiv G( x )$.
+we mean $F( x ) \equiv G( x )$.
 
-Gli ingredienti fondamentali necessari alla dimostrazione sono: la
-\emph{funzione universale} $U$ e la funzione di \emph{currying} $S$; tali
-funzioni possono essere semplicemente implementate in Python come segue.
+The main tools required by the first proof are: the  \emph{universal} function
+$U$ and the \emph{currying} function $S$; such functions can be implemented in
+a straightforward way in Python as follows.
 
-\subsection*{La funzione $U$}
+\subsection*{The $U$ function}
 
-La funzione universale è una funzione che date due stringhe $f$ ed $x$ come
-parametri restituisce la stringa $F(x)$ dove $F$ è la funzione corrispondente
-al sorgente $f$, denoteremo in simboli questa definizione con
+The universal function, given two strings $f$ and $x$ as arguments, returns
+the string $F(x)$, where $F$ is the function corresponding to the source code
+$f$, more formally
 
 \[
   U( f, x ) \equiv F( x )
 \]
 
-Una possibile implementazione di $U$ è data dal seguente codice:
+A possible implementation of such funciton is:
 
 \begin{pycode}
 def U( f, x ):
@@ -95,23 +99,23 @@ def U( f, x ):
   return F( x )
 \end{pycode}
 
-l'unico punto degno di nota è l'uso della funzione \verb|exec| che è in grado
-di eseguire il codice rappresentato dall stringa $f$ (che, di fatto, definisce
-la funzione), il resto dell'implementazione si occupa del dettaglio di
-recuperare la funzione dal dizionario \verb|locals| e di calcolarne il valore.
+the only notable part is the use of \verb|exec| function that is able to
+execute the code represented by the string $f$, the rest of the implementation
+deals with the detail of retrieving the function from the \verb|locals|
+dictionary and to compute its value.
 
-\subsection*{La funzione $S$}
+\subsection*{The $S$ function}
 
-La funzione di currying date due stringhe $f$ ed $y$ come parametri, dove $f$
-è il sorgente di una funzione $F$ a due parametri, restituisce una stringa $g$
-corrispondente al sorgente di una funzione $G$ tale che $F(x,y)=G(x)$,
-denoteremo in simboli questa definizione con
+The curring function, given the strings $f$ and $y$ as arguments, where $f$ is
+the source code of a function accepting two parameters, returns a string $g$
+corresponding to the source code of a function $G$ such that $F(x,y) \equiv
+G(x)$; more formally
 
 \[
-  S( f, y ) = g \qquad\text{tale che}\qquad U( g, x ) = U( S( f, y ), x ) \equiv F( x, y )
+  S( f, y ) = g \qquad\text{such that}\qquad U( g, x ) = U( S( f, y ), x ) \equiv F( x, y )
 \]
 
-L'implementazione della funzione di currying è ancora più elementare:
+Implementing such function is even more trivial:
 
 \begin{pycode}
 def S( f, y ):
@@ -121,39 +125,38 @@ def S( f, y ):
   return g.format( f, n, y )
 \end{pycode}
 
-essa ``avvolge'' la funzione $f$ (dopo averne determinato il nome usando una
-espressione regolare ed averla indentata) definendo così la funzione $G$ di
-cui restituisce il sorgente. Per comprendere il suo funzionamento, possiamo
-invocarla ad esempio sulla funzione $f$ data da
+this ``wraps'' the function $f$ (once getting his name and re-indenting it)
+obtaining a new function $G$ of which it returns the source code.
+
+To better understand how it works, let's apply it to the example $f$ defined as
 
 \begin{pycode}
-def Somma( x, y ):
+def Sum( x, y ):
 	return x + y
 \end{pycode}
 
-per cui avremo, ad esempio, $S( f, 3 )$
+that we can transform in $S( f, 3 )$ as
 
 \begin{pycode}
 def G( x ):
-  def Somma( x, y ):
+  def Sum( x, y ):
     return x + y
-  return Somma( x, 3 )
+  return Sum( x, 3 )
 \end{pycode}
 
-\section*{Il teorema di Kleene}
+\section*{Kleene's theorem}
 
-Siamo pronti per intraprendere la dimostrazione del teorema di Kleene, il cui
-enunciato è il seguente.
+We have all the tools required to proof Kleene's theorem that can be stated as follows.
 
 \begin{teo}
-Data una qualunque fuzione $T$ che termina per ogni valore del suo parametro è
-possibile costruire una funzione $r$ per cui $T(r) \equiv r$.
+Given any function $T$ that terminates for every value of its parameter, it is
+possible to build a function $r$ such that  $T(r) \equiv r$.
 \end{teo}
 
-Vediamo come dimostrare il teorema in modo costruttivo, ossia ottenendo di
-fatto la funzione $r$ a partire da $T$ e dalle funzioni $U$ ed $S$ introdotte
-in precedenza. Consideriamo le funzioni $e$ ed $m$ definite rispettivamente
-come segue:
+We show a constructive proof of the theorem, that is, we build the function
+$r$ using $T$ and the two building blocks $U$ and $S$ introduced in the
+previous section. Let's consider the functions $e$ and $m$ respectively defined
+by
 
 \begin{pycode}
 def E( x, f ): return U( U( f, f ), x )
@@ -163,8 +166,9 @@ def E( x, f ): return U( U( f, f ), x )
 def M( x ): return T( S( e, x ) )
 \end{pycode}
 
-Proviamo ora che $r = S( e, m )$ (nella cui definizione compare la funzione
-$T$, oltre a $E$, $M$, $S$ ed $U$):
+We now show that taking $r = S( e, m )$ gives the function named by the above
+theorem (observe that the source code of $r$  contains calls to $T$, $E$, $M$,
+$S$ and $U$):
 
 \begin{pycode}
 def R( x ):
@@ -172,94 +176,95 @@ def R( x ):
   return E( x, 'def M( x ): return T( S( e, x ) )' )
 \end{pycode}
 
-è precisamente la funzione postulata dal teorema:
+To show it simply requires to perform a series of very simple steps:
 
 \begin{align*}
-  U( r, x ) &= U( S( e, m ), x ) && \text{per definizione di $r$,}\\
-    &= E( x, m )                 && \text{per definizione di $S$,}\\
-    &= U( U( m, m ), x )         && \text{per definizione di $E$,}\\
-    &= U( M( m ), x )            && \text{per definizione di $U$,}\\
-    &= U( T( S( e, m ) ), x )    && \text{per definizione di $M$,}\\
-    &= U( T( r ), x )            && \text{per definizione di $r$.}
+  U( r, x ) &= U( S( e, m ), x ) && \text{by definition of $r$,}\\
+    &= E( x, m )                 && \text{by definition of $S$,}\\
+    &= U( U( m, m ), x )         && \text{by definition of $E$,}\\
+    &= U( M( m ), x )            && \text{by definition of $U$,}\\
+    &= U( T( S( e, m ) ), x )    && \text{by definition of $M$,}\\
+    &= U( T( r ), x )            && \text{by definition of $r$.}
 \end{align*}
 
-il che, per definizione di $\equiv$ ed $U$, corrisponde alla tesi del teorema.
+which, by definition of $\equiv$ ed $U$, leads to the theorem statement.
 
-\subsection*{Una applicazione divertente: quine}
+\subsection*{A fun application: quine}
 
-Una divertente applicazione di questo teorema è ottenere una \emph{quine},
-ossia una funzione che restitusca se stessa; con questo intendiamo una
-funzione $F$ tale che $F(x)$ sia il suo sorgente $f$ (indipendentemente dal
-parametro $x$). Osserviamo che questa non è a priori cosa banale. Ad esempio,
-la funzione
+We can use the Kleene theorem to obtain a \emph{quine}, that is, a function
+that returns its source code; by this we mean a function $F$ such that $F(x)$
+is equal (whatever the value of parameter $x$) to its source code $f$.
+
+This is not a trivial task
 
 \begin{pycode}
 def F( x ):
   return 'def F( x )\n\t return x'
 \end{pycode}
 
-è tale che $F(x)$ è pari a
+for example, is such that $F(x)$ has value
 
 \begin{pycode}
 def F( x ):
   return x
 \end{pycode}
 
-che è simile al suo sorgente, ma non identico. Osserviamo che è viceversa
-banale costruire una funzione $T$ (che termina sempre) la quale, avendo per
-argomento un sorgentge $f$, dia una funzione $g$ tale che $G(x)$ restituisca
-$f$:
+that looks like its source, but is not strictly identical to it. On the other
+hand, it is quite trivial to design a function $T$ (always terminating), that
+given as argument a source code $f$ returns a function $g$ such that $G(x)$
+always returns $f$ (whatever the value of $x$ is):
 
 \begin{pycode}
 def T( f ):
-  return 'def F( x ):\n\treturn {0!r}'.format( f )
+  return 'def G( x ):\n\treturn {0!r}'.format( f )
 \end{pycode}
 
-Grazie al teorema di Kleene, è possibile costruire $r$ il cui comportamento
-coincide con quello di $T(r)$ che è proprio restituire $r$; detto altrimenti:
-$R(x)$ restiuisce sempre $r$.
+Thanks to Kleene's theorem, it is now easy to obtain $r$ such that $r$ and
+$T(r)$ have the same output, that is $R(x)$ is always equal to $r$.
 
-\section*{Il teorema di Rice}
 
-Siamo arrivati al punto di queste note. Diremo che una collezione $\cal F$ di
-funzioni Python \emph{rispetta le funzioni} qualora
+\section*{Rice's theorem}
+
+We finally get to the main goal of this note.
+
+We say that a class $\cal F$ of functions is said to \emph{preserves
+properties} if and only if
 
 \[
-  f\in{\cal F} \quad\text{e}\quad f\equiv g \qquad\text{implica che}\qquad g\in{\cal F}
+  f\in{\cal F} \quad\text{and}\quad f\equiv g \qquad\text{implies}\qquad g\in{\cal F}
 \]
 
-detto altrimenti $\cal F$ contiene tutte le funzioni che ``si comportano allo
-stesso modo''; diremo inoltre che una collezione di funzioni $\cal F$ è
-\emph{decidibile} se si può scrivere una fuzione Python $D$ che termina sempre
-per cui $D(f)$ restituisce \verb|si| se $f\in\cal F$, o \verb|no| altrimenti,
-sono casi \emph{banali} quelli per cui la collezione è vuota, o comprente
-tutte le possibili funzioni.
+to put it in another way, $\cal F$ contains all the function that ``have the
+same behavior''; we also say that such a collection $\cal F$ can be
+\emph{decided} if one can write a function $D$ that always terminates such
+that  $D(f)$ yield \verb|yes| or \verb|no| whether $f\in\cal F$ or not; we
+call \emph{trivial} the empty class and the class containing all the function.
+
+We are now ready to state the theorem.
 
 \begin{teo}
-Se $\cal F$ rispetta le funzioni e non è banale, allora non è decidibile.
+If $\cal F$ preserves properties and is not trivial, then it can't be decided
 \end{teo}
 
-Diamo una dimostrazione per assurdo di questo teorema basandoci su quello di
-Rice; consideriamo due funzioni $p\in\cal F$ e $q\not\in\cal F$ che
-esisteranno dal momento che $\cal F$ non è banale e sia $D$ la funzione che
-decide $\cal F$; consideriamo la funzione seguente funzione $T$ (che termina
-per ogni valore del parametro dato che $D$ termina per ipotesi):
+A proof by contradiction can be obtained using the Rice theorem. Let $p\in\cal
+F$ e $q\not\in\cal F$ (they must exists since $\cal F$ is not trivial) and let
+$D$ the function that decides  $\cal F$; let's consider the function $T$
+(which always terminates, given that $D$ does):
 
 \begin{pycode}
 def T( f ):
-  if D( f ) == 'si':
+  if D( f ) == 'yes':
     return q
   else:
     return p
 \end{pycode}
 
-Per il teorema di Kleene, esiste un $r$ tale per cui $r\equiv T(r)$ quindi,
-dato che $\cal F$ rispetta le funzioni, o $r\in\cal F$ e $T(r)\in\cal F$,
-oppure $r\not\in\cal F$ e $T(r)\not\in\cal F$. Ma questo non può essere dal
-momento che, per definizione di $T$, se $r\in\cal F$ allora $D(r)=$\verb|si| quindi
-$T(r)=q\not\in\cal F$ e, viceversa, se $r\not\in\cal F$ allora
-$D(r)=$\verb|no| quindi $T(r)=p\in\cal F$.
-
+By the Kleene's theorem, there exists an $r$ such that $r\equiv T(r)$ and
+hence, given that $\cal F$ preserves properties, it can be $r\in\cal F$ and
+$T(r)\in\cal F$, or $r\not\in\cal F$ and $T(r)\not\in\cal F$. This can't be,
+given that by definition of $T$ if $r\in\cal F$ then $D(r)=$\verb|yes| and
+hence $T(r)=q\not\in\cal F$; on the other hand, if $r\not\in\cal F$, then
+$D(r)=$\verb|no| and hence $T(r)=p\in\cal F$.
 
 
 \end{document}

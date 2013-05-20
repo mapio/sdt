@@ -1,6 +1,9 @@
 from re import match
+from sys import version_info, exit
 
-# Funzione universale
+if version_info.major != 3: exit( 'Please run with ptyhon3!' )
+
+# Universal funcition
 
 def U( f, x ):
 	locals = {}
@@ -8,7 +11,7 @@ def U( f, x ):
 	F = next( iter( locals.values() ) )
 	return F( x )
 
-# Funzione di curryficazione
+# Curryfication function
 
 def S( f, y ):
 	n = match( 'def\s+([^(]+)\s*\(', f ).group( 1 )
@@ -16,7 +19,7 @@ def S( f, y ):
 	g = 'def G( x ):\n\t{0}\n\treturn {1}( x, {2!r} )'.format( f, n, y )
 	return g
 
-# Funzioni costruite nella dimostrazione del teorema di Rice
+# Functions needed in the proof of Rice Theorem
 
 e = 'def E( x, f ): return U( U( f, f ), x )'
 
@@ -24,12 +27,12 @@ m = 'def M( x ): return T( S( e, x ) )'
 
 r = S( e, m )
 
-# Esempio di funzione T
+# Example of funcion T
 
-def T( f ):  # funzione che restituisce codice che ha per argomento
-	return 'def F( x ):\n\treturn {0!r}'.format( f )
+def T( f ):  # functions that returns the source code given as argument
+	return 'def G( x ):\n\treturn {0!r}'.format( f )
 
-# output di r, U( r, x ) e U( T( r ), x )
+# output of r, U( r, x ) e U( T( r ), x ) (should be all identical)
 
 print( 'r', '-' * 89, '\n\n', r, '\n' )
 print( 'U( r, x )', '-' * 82, '\n\n', U( r, 'x' ), '\n' )

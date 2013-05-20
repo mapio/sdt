@@ -1,27 +1,20 @@
 Systematic Debugging Techniques
 ===============================
 
-Questo repository contiene il materiale di supporto del corso di dottorato
+This repository contains the support material related to the PhD class
 [Systematic Debugging Techniques](http://santini.di.unimi.it/d/sdt/).
 
-Per sperimentare con il codice messo a disposizione è necessario installare e
-configurare vari software di supporto; al fine di facilitare gli studenti in
-questo compito è possibile adoperare l'immagine di una *macchina virtuale*
-appositamente predisposta.
+To practice with the provided code requires the installation and configuration
+of several software tools; in order to help students in such task, a *virtual
+machine* image possible is provided.
 
-Per farlo è necessario intsallare il seguente software:
+To setup such image you'll need to:
 
-* scaricare ed installare [VirtualBox](https://www.virtualbox.org/), seguendo le [apposite istruzioni](https://www.virtualbox.org/manual/ch02.html) (non è necessario installare l'*extension pack*);
-* scaricare ed insallare [Vagrant](http://www.vagrantup.com/), seguendo le [apposite istruzioni](http://docs.vagrantup.com/v2/installation/index.html);
-* installare il plugin [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest) e predisporre l'immagine base `precise32`, per farlo è sufficiente impartire (alla *shell* del sistema operativo) i comandi:
+* download and install [VirtualBox](https://www.virtualbox.org/), following the [instructions](https://www.virtualbox.org/manual/ch02.html) (there is no need to intsall the *extension pack*);
+* download and install [Vagrant](http://www.vagrantup.com/), following the [instructions](http://docs.vagrantup.com/v2/installation/index.html);
+* install the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest), by entering (at the operating system *shell* prompt) the command `vagrant plugin install vagrant-vbguest`.
 
-```python
-	vagrant box add precise32 http://files.vagrantup.com/precise32.box
-	vagrant plugin install vagrant-vbguest
-```
-
-Una volta ottenuta in questo modo una installazione base di Vagrant, portatevi
-in una directory vuota a vostro piacimento impartite i seguenti comandi:
+Once a basic Vagrant setup has been reached, move to an empty directory of your choice and give the following commands:
 
 ```bash
 	curl -sLO https://raw.gith ub.com/mapio/sdt/master/Vagrantfile
@@ -31,12 +24,12 @@ in una directory vuota a vostro piacimento impartite i seguenti comandi:
 	vagrant reload
 ```
 
-dove il primo comando può essere sostituito con qualunque altro modo di salvare in un file di nome
-`Vagrantfile` il contenuto all'URL https://raw.github.com/mapio/sdt/master/Vagrantfile.
+where the first command can be replaced by any other methof of saving in a file named
+`Vagrantfile` the content at URL https://raw.github.com/mapio/sdt/master/Vagrantfile.
 
-Se tutto ha funzionato a dovere, impartendo dalla stessa directory il comando
-`vagrant ssh` è possibile collegarsi a tale macchina virtuale; osservate che
-nella home dell'utente corrente troverete la sottodirectory `sdt` che
-costituisce un *clone* di questo repository e che sotto `/vagrant`sarà montata
-la directory del sistema ospite dove avete scaricato il file `Vagrantfile` (e
-lanciato i vari comandi `vagrant`).
+If non errors are encountered, you can connect to the virtual machine with the
+command `vagrant ssh`; please not that in the home directory of the guest
+(virutal) system you'll find a `sdt` subdirectory containing a *clone* of this
+repository and that under `/vagrant` is mounted the directory of the host
+system where you have downloaded the file `Vagrantfile` (and run the various
+`vagrant` commands).
