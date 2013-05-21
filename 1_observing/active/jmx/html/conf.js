@@ -13,11 +13,15 @@ mbeans_configuration = [
 		attribute: 'SystemLoadAverage'
 	}],
 	[{
-		name:     'java.lang:type=Threading',
+		name: 'java.lang:type=Threading',
 		attribute: 'ThreadCount'
 	}],
 	[{
-		name:     'java.lang:type=Threading',
+		name: 'java.lang:type=Threading',
 		attribute: 'CurrentThreadCpuTime'
+	}],
+	[{
+		name: 'it.unimi.di:type=SdtDemo',
+		attribute: 'counter'
 	}]
 ];
