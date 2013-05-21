@@ -1,0 +1,9 @@
+# http://mirror.switch.ch/eclipse/technology/epp/downloads/release/juno/SR2/eclipse-java-juno-SR2-linux-gtk.tar.gz
+
+curl -sL http://rm.mirror.garr.it/mirrors/eclipse/technology/epp/downloads/release/juno/SR2/eclipse-java-juno-SR2-linux-gtk.tar.gz > /tmp/eclipse.tgz
+
+cd /usr/local/lib && tar zxvf /tmp/eclipse.tgz
+
+ln -s /usr/local/lib/eclipse/eclipse /usr/local/bin/
+
+rm /tmp/eclipse.tgz

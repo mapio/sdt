@@ -11,7 +11,8 @@ provision() {
 	 fi
 }
 
-provision update 	/.sdt-updated
+provision update 	/.sdt-updated-on-$(date +%Y%m%d)
+provision add-apt-repository /usr/bin/add-apt-repository
 provision python3	/usr/bin/python3
 provision java7 	/usr/lib/jvm/java-7-oracle/jre/bin/java
 provision gdb 		/usr/bin/gdb
@@ -22,6 +23,8 @@ provision bash 		/home/vagrant/.bash_aliases
 provision words 	/usr/share/dict/words
 provision gnuplot 	/usr/bin/gnuplot
 provision jars 		/usr/share/java/.sdt-jars
+provision daikon 	/usr/local/lib/daikon/README.txt
+#provision eclipse 	/usr/local/bin/eclipse
 
 if ! [ -d /home/vagrant/sdt ]; then
 	echo "*** Cloning 'sdt' from GitHub" 1>&2

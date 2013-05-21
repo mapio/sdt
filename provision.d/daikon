@@ -1,0 +1,8 @@
+apt-get install -y unzip
+
+curl -sL http://groups.csail.mit.edu/pag/daikon/download/daikon.zip > /tmp/daikon.zip
+
+cd /usr/local/lib && unzip /tmp/daikon.zip
+
+rm -f /tmp/daikon.zip
+
