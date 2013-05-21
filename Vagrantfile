@@ -4,6 +4,7 @@ Vagrant.configure("2") do |config|
 	sdt.vm.box_url = "http://files.vagrantup.com/precise32.box"
     sdt.vbguest.auto_update = false
     sdt.vm.network :forwarded_port, guest: 8000, host: 8000
+    sdt.vm.network :forwarded_port, guest: 8081, host: 8081
     sdt.vm.provision :shell, :path => "provision.sh"
     sdt.ssh.forward_x11 = true
   end
