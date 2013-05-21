@@ -21,6 +21,7 @@ provision mercurial /usr/local/bin/hg
 provision bash 		/home/vagrant/.bash_aliases
 provision words 	/usr/share/dict/words
 provision gnuplot 	/usr/bin/gnuplot
+provision jars 		/usr/share/java/.sdt-jars
 
 if ! [ -d /home/vagrant/sdt ]; then
 	echo "*** Cloning 'sdt' from GitHub" 1>&2

@@ -13,24 +13,14 @@ cleanup() {
 	kill $http
 }
 
-if ! [ -r jolokia.jar ]; then
-	echocol "Getting the jolokia.jar"
-	curl -sL http://labs.consol.de/maven/repository/org/jolokia/jolokia-jvm/1.1.1/jolokia-jvm-1.1.1-agent.jar > jolokia.jar
-fi
-
-if ! [ -r pojo-mbean.jar ]; then
-	echocol "Getting the pojo-mbean.jar"
-	curl -sL https://oss.sonatype.org/content/repositories/releases/org/softee/pojo-mbean/1.1/pojo-mbean-1.1.jar > pojo-mbean.jar
-fi
-
-export CLASSPATH=.:pojo-mbean.jar
+export CLASSPATH=.:/usr/share/java/pojo-mbean.jar
 
 echocol "Start the very trivial BeanedCounter class"
 javac BeanedCounter.java
 java BeanedCounter > /dev/null & loop=$!
 
 echocol "Start the Jolokia agent"
-java -jar jolokia.jar --port 8081 --host 0.0.0.0 start $loop
+java -jar /usr/share/java/jolokia.jar --port 8081 --host 0.0.0.0 start $loop
 
 echocol "Starting a web server for ./html dir"
 cd html
