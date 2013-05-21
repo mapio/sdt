@@ -17,15 +17,13 @@ To setup such image you'll need to:
 * download and install [Vagrant](http://www.vagrantup.com/), following the [instructions](http://docs.vagrantup.com/v2/installation/index.html);
 * install the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest), by entering at the operating system *shell* prompt: `vagrant plugin install vagrant-vbguest`.
 
-Once a basic Vagrant setup has been reached, move to an empty directory of your choice and give the following commands:
+Once a basic Vagrant setup has been reached, move to an empty directory of your choice and give the following command:
 
 ```bash
-	curl -sL https://github.com/mapio/sdt/archive/master.tar.gz | tar --strip 1 --wildcards -zxvf - '*/Vagrantfile' '*/provision.*'
-	vagrant up
-	vagrant reload
-	vagrant vbguest
-	vagrant reload
+	curl -sL https://raw.github.com/mapio/sdt/master/getsdt.sh | bash
 ```
+
+and follow the given instructions (the script requires the presence of `curl`, `bash`, and GNU `tar`).
 
 If no errors are encountered, you can connect to the virtual machine with the
 command `vagrant ssh`; please note that in the home directory of the guest
