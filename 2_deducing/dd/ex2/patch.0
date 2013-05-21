@@ -1,0 +1,12 @@
+2a3,9
+> int tot = 0;
+> 
+> void add( int x ) 
+> {
+> 	tot += 3;
+> }
+> 
+5c12
+< 	printf( "OK\n" );
+---
+> 	if ( tot == 3 ) printf( "OK\n" );
