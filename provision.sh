@@ -25,6 +25,7 @@ provision gnuplot 	/usr/bin/gnuplot
 provision jars 		/usr/share/java/.sdt-jars
 provision daikon 	/usr/local/lib/daikon/README.txt
 #provision eclipse 	/usr/local/bin/eclipse
+provision splint 	/usr/bin/splint
 
 if ! [ -d /home/vagrant/sdt ]; then
 	echo "*** Cloning 'sdt' from GitHub" 1>&2
