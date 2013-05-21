@@ -20,15 +20,12 @@ To setup such image you'll need to:
 Once a basic Vagrant setup has been reached, move to an empty directory of your choice and give the following commands:
 
 ```bash
-	curl -sLO https://raw.github.com/mapio/sdt/master/Vagrantfile
+	curl -sL https://github.com/mapio/sdt/archive/master.tar.gz | tar --strip 1 --wildcards -zxvf - '*/Vagrantfile' '*/provision.*'
 	vagrant up
 	vagrant reload
 	vagrant vbguest
 	vagrant reload
 ```
-
-where the first command can be replaced by any other methof of saving in a file named
-`Vagrantfile` the content at URL https://raw.github.com/mapio/sdt/master/Vagrantfile.
 
 If no errors are encountered, you can connect to the virtual machine with the
 command `vagrant ssh`; please note that in the home directory of the guest
