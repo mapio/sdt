@@ -1,8 +1,13 @@
 #!/bin/bash
 
-if [ -r Vagrantfile ]; then
-	echo "I found a 'Vagrantfile', please run this command from an empty directory"
+if [ -d .hg ] || [ -d .git ]; then
+	echo "*** This script can't be run from a git/hg repository."
 	exit
+fi
+
+if [ -r Vagrantfile ]; then
+	echo "*** Removing the previous versions of 'Vagrantfile', 'provision.sh', and 'provision.d'..."
+	rm -rf Vagrantfile provision.sh provision.d
 fi
 
 echo -n "*** Downloading the required files from GitHub..."
