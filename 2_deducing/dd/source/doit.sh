@@ -2,4 +2,4 @@
 
 export PYTHONPATH=..:.
 
-python3 ex2.py
+python3 isolate.py
