@@ -1,7 +1,7 @@
 from functools import wraps
-from operator import itemgetter 
+from operator import itemgetter
 
-__all__ = [ 'simplify', 'isolate', 'PASS', 'FAIL', 'UNRESOLVED' ]
+__all__ = [ 'simplify', 'isolate', 'circ2str', 'PASS', 'FAIL', 'UNRESOLVED' ]
 
 PASS, FAIL, UNRESOLVED = 'PASS', 'FAIL', 'UNRESOLVED'
 
@@ -15,6 +15,11 @@ def memoize( test ):
 		cache[ _circumstances ] = result
 		return result
 	return _test
+
+def circ2str( circumstances, size, fill = '.' ):
+	d = dict( circumstances )
+	x = ''.join( str( d[ i ] ) if i in d else fill for i in range( size ) )
+	return x
 
 def split( circumstances, n ):
 	length = len( circumstances )

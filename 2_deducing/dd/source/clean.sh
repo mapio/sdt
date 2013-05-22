@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm -f adder adder.c *.orig *.rej
+rm -rf adder adder.c *.orig *.rej __pycache__
