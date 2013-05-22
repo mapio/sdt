@@ -11,19 +11,22 @@ To practice with the provided code requires the installation and configuration
 of several software tools; in order to help students in such task, a *virtual
 machine* image possible is provided.
 
-To setup such image you'll need to:
+To setup such image on your *guest* operating system you'll need to:
 
 * download and install [VirtualBox](https://www.virtualbox.org/), following the [instructions](https://www.virtualbox.org/manual/ch02.html) (there is no need to intsall the *extension pack*);
 * download and install [Vagrant](http://www.vagrantup.com/), following the [instructions](http://docs.vagrantup.com/v2/installation/index.html);
-* install the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest), by entering at the operating system *shell* prompt: `vagrant plugin install vagrant-vbguest`.
+* install the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest), by entering at the guest *shell* prompt: `vagrant plugin install vagrant-vbguest`.
 
-Once a basic Vagrant setup has been reached, move to an empty directory of your choice and give the following command:
+Once such a basic Vagrant setup has been reached, move to an *empty directory*
+of your choice and give the following command:
 
 ```bash
-	curl -sL https://raw.github.com/mapio/sdt/master/getsdt.sh | bash
+	curl -sL http://git.io/getsdt.sh | bash
 ```
 
-and follow the given instructions (the script requires the presence of `curl`, `bash`, and GNU `tar`).
+and follow the given instructions (to run this script, you must have `curl`,
+`bash`, and GNU `tar` installed on the guest). You can run again the above
+command again in the same directory to update the virtual machine.
 
 If no errors are encountered, you can connect to the virtual machine with the
 command `vagrant ssh`; please note that in the home directory of the guest
