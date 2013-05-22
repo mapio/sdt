@@ -5,27 +5,36 @@ export DEBIAN_FRONTEND=noninteractive
 provision() {
 	if [ -r "$2" ]; then
 		echo "*** Already provisioned: $1" 1>&2
-	else
+	elif [ -r "/vagrant/provision.d/$1" ]; then
 		echo "*** Provisioning: $1" 1>&2
 	 	bash "/vagrant/provision.d/$1" && touch "$2"
+	 else
+		echo "*** Provisioning (via apt-get): $1" 1>&2
+	 	apt-get -y install "$1" && touch "$2"
 	 fi
 }
 
+# Provisioned via a script in provision.d
+
 provision update 	/.sdt-updated-on-$(date +%Y%m%d)
-provision add-apt-repository /usr/bin/add-apt-repository
 provision python3	/usr/bin/python3
 provision java7 	/usr/lib/jvm/java-7-oracle/jre/bin/java
-provision gdb 		/usr/bin/gdb
-provision valgrind 	/usr/bin/valgrind
 provision jython 	/usr/local/bin/jython
 provision mercurial /usr/local/bin/hg
 provision bash 		/home/vagrant/.bash_aliases
-provision words 	/usr/share/dict/words
-provision gnuplot 	/usr/bin/gnuplot
 provision jars 		/usr/share/java/.sdt-jars
 provision daikon 	/usr/local/lib/daikon/README.txt
 #provision eclipse 	/usr/local/bin/eclipse
-provision splint 	/usr/bin/splint
+
+# Provisioned via apt-get install
+
+provision python-software-properties /usr/bin/add-apt-repository
+provision splint /usr/bin/splint
+provision gnuplot /usr/bin/gnuplot
+provision wamerican-small /usr/share/dict/words
+provision ant /usr/bin/ant
+provision valgrind /usr/bin/valgrind
+provision gdb /usr/bin/gdb
 
 if ! [ -d /home/vagrant/sdt ]; then
 	echo "*** Cloning 'sdt' from GitHub" 1>&2
