@@ -1,1 +1,2 @@
-assert 1 == 0, "Got it!"
+x = "Got it!"
+assert 1 == 0, x

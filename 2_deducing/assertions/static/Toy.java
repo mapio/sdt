@@ -5,10 +5,10 @@ public class Toy {
 		test();
 		if ( ASSERTIONS ) assert 1 == 0;
 	}
-	public static void test() { 
+	public static void test() {
 		boolean assertionsAreEnabled = false;
 		assert assertionsAreEnabled = true; // side-effect is intended!
-		if (assertionsAreEnabled) System.out.println( "Assertions are enabled!" );
+		if ( assertionsAreEnabled ) System.out.println( "Assertions are enabled!" );
 		else System.out.println( "Assertions are disabled!" );
 	}
 }
