@@ -1,6 +1,3 @@
 #!/bin/bash
 
-rm adder
-rm adder.c
-rm *.orig
-rm *.rej
+rm -f adder adder.c *.orig *.rej
