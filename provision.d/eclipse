@@ -3,6 +3,7 @@
 curl -sL http://rm.mirror.garr.it/mirrors/eclipse/technology/epp/downloads/release/juno/SR2/eclipse-java-juno-SR2-linux-gtk.tar.gz > /tmp/eclipse.tgz
 
 cd /usr/local/lib && tar zxvf /tmp/eclipse.tgz
+chown -R root:root /usr/local/lib/eclipse
 
 ln -s /usr/local/lib/eclipse/eclipse /usr/local/bin/
 

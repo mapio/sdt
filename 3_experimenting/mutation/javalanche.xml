@@ -1,0 +1,65 @@
+<project name="Javalanche">
+
+<!-- Properties can either be supplied on the command line, via a properties file or specified here -->
+
+<!--
+	<property file="javalanche.properties" />
+-->
+<!--
+	<property name="prefix" value=""/>
+	<property name="tests" value=""/>
+	<property name="javalanche" value=""/>
+	<property name="cp" value=""/>
+-->
+
+	<property name="project.prefix" value="${prefix}"/>
+	<property name="project.tests" value="${tests}"/>
+	<property name="javalanche.location" value="${javalanche}" />
+	<property name="javalanche.dist.dir" value="${javalanche}" />
+
+	<!-- Allows additional properties from (de.unisb.cs.st.javalanche.mutation.properties.PropertyConfiguration) -->
+	<condition property="javalanche.config.properties" value="${javalanche.properties}" else="">
+			<isset property="javalanche.properties" />
+	</condition>
+
+	<import file="import.xml"/>
+	<import file="${javalanche.location}/src/main/resources/javalanche-tasks.xml" />
+	<import file="${javalanche.location}/src/main/resources/javalanche-add-tasks.xml"/>
+
+<!-- To compute the coverage or data impact of mutations, this file has to be included. -->
+<!--	<import file="${javalanche.location}/src/main/resources/coverage-include.xml" /> -->
+
+	<!--
+	Task that is called by the different stages of Javalanche.
+	This task should not be called directly.
+	-->
+	<target name="javalancheTask">
+		<mkdir dir="mutation-files/junit-reports"></mkdir>
+		<junit dir="." printSummary="no" fork="true" forkmode="once" showoutput="true">
+			<classpath>
+				<path refid="javalanche.classpath.add" />
+				<pathelement path="${cp}"></pathelement>
+			</classpath>
+
+			<jvmarg line="${javalanche.config.properties} ${javalanche.arg.line}" />
+
+			<formatter type="xml"/>
+			<formatter usefile="true" type="plain"/>
+			<test todir="${javalanche.out.dir}/junit-reports" name="${javalanche.wrapper.testsuite}" />
+		</junit>
+	</target>
+
+	<target name="testParameters">
+		<echo>
+			project.prefix        : ${project.prefix}
+			project.tests 	      : ${project.tests}
+			cp                    : ${cp}
+			javalanche.location   : ${javalanche.location}
+			javalanche.dist.dir   : ${javalanche.dist.dir}
+			javalanche.config.properties : ${javalanche.config.properties}
+		</echo>
+	</target>
+
+	<target name="mutationTest" depends="startHsql,schemaexport,scanProject,scan,createSingleRandomTask,runSingleTask,analyzeResults,stopHsql"/>
+
+</project>

@@ -24,17 +24,19 @@ provision mercurial /usr/local/bin/hg
 provision bash 		/home/vagrant/.bash_aliases
 provision jars 		/usr/share/java/.sdt-jars
 provision daikon 	/usr/local/lib/daikon/README.txt
+provision javalanche /usr/local/lib/javalanche/javalanche.xml
 #provision eclipse 	/usr/local/bin/eclipse
 
 # Provisioned via apt-get install
 
+provision ant /usr/bin/ant
+provision gdb /usr/bin/gdb
+provision gnuplot /usr/bin/gnuplot
+provision maven2 /usr/bin/mvn
 provision python-software-properties /usr/bin/add-apt-repository
 provision splint /usr/bin/splint
-provision gnuplot /usr/bin/gnuplot
-provision wamerican-small /usr/share/dict/words
-provision ant /usr/bin/ant
 provision valgrind /usr/bin/valgrind
-provision gdb /usr/bin/gdb
+provision wamerican-small /usr/share/dict/words
 
 if ! [ -d /home/vagrant/sdt ]; then
 	echo "*** Cloning 'sdt' from GitHub" 1>&2
