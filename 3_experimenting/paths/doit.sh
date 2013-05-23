@@ -5,6 +5,8 @@ pip install nose coverage
 
 ./clean.sh
 
+export PYTHONPATH=$(pwd)
+
 run() {
 	func=$1
 	num=$2
@@ -19,3 +21,6 @@ done
 for num in 0 1 2; do
 	run branch $num
 done
+
+python3 -m http.server
+
