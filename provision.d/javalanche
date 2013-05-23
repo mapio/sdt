@@ -1,0 +1,11 @@
+cd /tmp
+
+curl -sL https://github.com/david-schuler/javalanche/archive/master.zip > javalanche.zip
+
+rm -rf javalanche-master
+unzip javalanche.zip
+cd javalanche-master
+./makeDist.sh
+
+mv javalanche-* /usr/local/lib/javalanche
+chown -R root:root /usr/local/lib/javalanche
