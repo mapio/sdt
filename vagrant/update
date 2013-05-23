@@ -1,0 +1,12 @@
+#!/bin/bash
+
+(
+echo '$functions = <<FUNCTIONS'
+for i in provision.d/*; do
+	echo function $(basename $i) \{
+	cat $i | sed s/^/$'\t'/
+	echo \}
+done
+echo 'FUNCTIONS'
+
+cat Vagrantfile.in ) > ./Vagrantfile

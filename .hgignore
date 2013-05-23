@@ -1,2 +1,2 @@
-.vagrant
-references
+^vagrant/.vagrant
+^vagrant/Vagrantfile
