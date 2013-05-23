@@ -12,5 +12,5 @@ class Tournament( object ):
 	def wins( self, num_player ):
 		self.players[ num_player ].win()
 	def winner( self ):
-		victories = map( lambda x : x.victories(), self.players )
+		victories = list( map( lambda x : x.victories(), self.players ) )
 		return victories.index( max( victories ) )
