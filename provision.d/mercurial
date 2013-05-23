@@ -1,6 +1,3 @@
-curl -sL https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
-pip install --upgrade distribute
-pip install --upgrade pip
 pip install mercurial hg-git
 
 cat >/home/vagrant/.hgrc <<-EOF
