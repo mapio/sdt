@@ -5,4 +5,6 @@ pip install https://github.com/nsigustavo/ludibrio/archive/master.zip
 
 ./clean.sh
 
+export PYTHONPATH=$(pwd)
 
+nosetests test.py
