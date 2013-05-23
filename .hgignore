@@ -1,2 +1,2 @@
-^vagrant/.vagrant
-^vagrant/Vagrantfile
+.vagrant/.*
+Vagrantfile$
