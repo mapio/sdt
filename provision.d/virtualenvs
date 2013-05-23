@@ -1,0 +1,2 @@
+sudo -iu vagrant virtualenv -p /usr/bin/python2 /home/vagrant/.sdtvenv2
+sudo -iu vagrant virtualenv -p /usr/bin/python3 /home/vagrant/.sdtvenv3
