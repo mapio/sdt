@@ -6,7 +6,9 @@ _update
 _provision ant /usr/bin/ant
 _provision gdb /usr/bin/gdb
 _provision gnuplot /usr/bin/gnuplot
+_provision make /usr/bin/make
 _provision maven2 /usr/bin/mvn
+_provision patch /usr/bin/patch
 _provision python-software-properties /usr/bin/add-apt-repository
 _provision splint /usr/bin/splint
 _provision valgrind /usr/bin/valgrind
