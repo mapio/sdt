@@ -2,10 +2,10 @@ package sdt;
 
 public class Adder {
 
-	private int tot = -2;
+	private int tot = 0;
 
 	public void add( int x ) {
-		tot += x + 1;
+		tot += x;
 	}
 
 	public int value() {

@@ -1,13 +1,9 @@
 package sdt;
 
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import sdt.Mult;
 
 public class TestMult {
 
@@ -19,19 +15,15 @@ public class TestMult {
 	}
 
 	@Test
-	public void testMult() {
-		int v;
+	public void testMultOK() {
 		m.mult( 1, 2 );
-		v = m.result();
-		assertEquals( v, 2 );
+		assertEquals( 2, m.result() );
 	}
 
 	@Test
-	public void testMultX() {
-		int v;
+	public void testMultFail() {
 		m.mult( 3, 2 );
-		v = m.result();
-		assertEquals( v, 6 );
+		assertEquals( 6, m.result() );
 	}
 
 }
