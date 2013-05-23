@@ -21,12 +21,11 @@ Once such a basic Vagrant setup has been reached, move to an *empty directory*
 on the host filesystem and issue the command:
 
 ```bash
-	curl -sL http://git.io/getsdt.sh | bash
+	curl -sL http://git.io/getsdt.sh | sh
 ```
 
-and follow the given instructions (to run this script, you must have `curl`,
-`bash`, and GNU `tar` installed on the host). You can run again the above
-command in the same directory to *update* the virtual machine.
+and follow the given instructions. You can run again the above command in the
+same directory to *update* the virtual machine.
 
 If no errors are encountered, you can connect to the virtual machine with the
 command `vagrant ssh`; please note that in the home directory of the *guest*
