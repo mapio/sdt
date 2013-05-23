@@ -1,5 +1,5 @@
 #!/bin/bash
 
-rm -rf venv *.pyc
+rm -rf *.pyc
 
 
