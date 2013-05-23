@@ -15,17 +15,17 @@ To setup such image on your *host* operating system you'll need to:
 
 * download and install [VirtualBox](https://www.virtualbox.org/), following the [instructions](https://www.virtualbox.org/manual/ch02.html) (there is no need to intsall the *extension pack*);
 * download and install [Vagrant](http://www.vagrantup.com/), following the [instructions](http://docs.vagrantup.com/v2/installation/index.html);
-* install the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest), by entering at the host *shell* prompt: `vagrant plugin install vagrant-vbguest`.
 
-Once such a basic Vagrant setup has been reached, move to an *empty directory*
+once such a basic Vagrant setup has been reached, move to an *empty directory*
 on the host filesystem and issue the command:
 
 ```bash
 	curl -sL http://git.io/getsdt.sh | sh
 ```
 
-and follow the given instructions. You can run again the above command in the
-same directory to *update* the virtual machine.
+and follow the given instructions (of course, `curl` must be available on the
+host). You can run again the above command in the same directory to *update*
+the virtual machine.
 
 If no errors are encountered, you can connect to the virtual machine with the
 command `vagrant ssh`; please note that in the home directory of the *guest*
