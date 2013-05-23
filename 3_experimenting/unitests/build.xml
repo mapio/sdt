@@ -1,39 +1,46 @@
 <project name="Unit test example" default="test" basedir=".">
 
-	<property name="dest" value="target/classes" />
-	<property name="test.reports.dir" value="target/test-reports" />
+	<property name="classes" value="build/classes"/>
+	<property name="reports" value="build/reports"/>
 
 	<path id="cp">
-		<pathelement path="${dest}"/>
 		<pathelement location="/usr/share/java/junit4.jar"/>
 	</path>
 
 	<target name="compile">
-		<mkdir dir="${dest}"/>
-		<javac destdir="${dest}" debug="true">
+		<mkdir dir="${classes}"/>
+		<javac destdir="${classes}" debug="true">
 			<src>
 				<pathelement path="src/"/>
 			</src>
-			<classpath refid="cp" />
+			<classpath refid="cp"/>
 		</javac>
 	</target>
 
 	<target name="clean">
-		<delete dir="target/"/>
+		<delete dir="build/"/>
 	</target>
 
 
 	<target name="test" depends="compile">
-		<mkdir dir="${test.reports.dir}"/>
-		<junit dir="./" failureproperty="test.failure" haltonerror="true" haltonfailure="true" printsummary="true" fork="true" forkmode="once">
-			<classpath refid="cp" />
-			<batchtest todir="${test.reports.dir}">
+		<mkdir dir="${reports}"/>
+		<junit dir="." printsummary="true" fork="true" forkmode="once">
+			<classpath>
+				<path refid="cp"/>
+				<pathelement location="${classes}"/>
+			</classpath>
+			<batchtest todir="${reports}">
 				<fileset dir="src/test">
 					<include name="**/TestSuite.java"/>
 				</fileset>
 			</batchtest>
 			<formatter type="plain"/>
+			<formatter type="xml"/>
 		</junit>
+		<junitreport tofile="${reports}/junit.xml">
+            <fileset file="${reports}/TEST-*.xml"/>
+            <report todir="${reports}/junit"/>
+		</junitreport>
 	</target>
 
 </project>
