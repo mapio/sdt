@@ -25,7 +25,9 @@ cat > /home/vagrant/.bash_aliases <<-EOF
 	alias l='/bin/ls -Ghl'
 EOF
 
-cat >> /home/vagrant/.profile <<-EOF
-	# SDT environment
-	PIP_DOWNLOAD_CACHE=/home/vagrant/.pip/cache
+mkdir -p /home/vagrant/.pip
+cat > /home/vagrant/.pip/pip.conf <<-EOF
+	[global]
+	download_cache = ~/.pip/cache
 EOF
+
