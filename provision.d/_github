@@ -1,0 +1,7 @@
+if ! [ -d /home/vagrant/sdt ]; then
+	echo "*** Cloning 'sdt' from GitHub" 1>&2
+	su - vagrant -c 'hg clone git://github.com/mapio/sdt.git'
+else
+	echo "*** Updating 'sdt' from GitHub" 1>&2
+	su - vagrant -c 'hg -R sdt pull --update'
+fi

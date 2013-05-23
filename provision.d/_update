@@ -1,0 +1,6 @@
+if ! [ -r /.sdt-updated-on-$(date +%Y%m%d) ]; then
+	apt-get -q -y update
+	#apt-get -q -y dist-upgrade
+	rm -f /home/vagrant/postinstall.sh /.sdt-updated-on-*
+	touch /.sdt-updated-on-$(date +%Y%m%d)
+fi

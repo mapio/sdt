@@ -1,0 +1,9 @@
+if [ -r "$2" ]; then
+	echo "*** Already provisioned: $1" 1>&2
+elif [ "$(type -t "$1")" == function ]; then
+	echo "*** Provisioning: $1" 1>&2
+ 	"$1" && touch "$2"
+else
+	echo "*** Provisioning (via apt-get): $1" 1>&2
+	apt-get -y install "$1" && touch "$2"
+fi

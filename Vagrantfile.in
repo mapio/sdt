@@ -1,0 +1,40 @@
+$provision = <<PROVISION
+# Update the package archive
+export DEBIAN_FRONTEND=noninteractive
+_update
+# Provisioned via apt-get install
+_provision ant /usr/bin/ant
+_provision gdb /usr/bin/gdb
+_provision gnuplot /usr/bin/gnuplot
+_provision maven2 /usr/bin/mvn
+_provision python-software-properties /usr/bin/add-apt-repository
+_provision splint /usr/bin/splint
+_provision valgrind /usr/bin/valgrind
+_provision wamerican-small /usr/share/dict/words
+# Provisioned by a function
+_provision python3 /usr/bin/python3
+_provision java7 /usr/lib/jvm/java-7-oracle/jre/bin/java
+_provision jython /usr/local/bin/jython
+_provision mercurial /usr/local/bin/hg
+_provision userfiles /home/vagrant/.userfiles
+_provision jars /usr/share/java/.sdt-jars
+_provision daikon /usr/local/lib/daikon/README.txt
+_provision javalanche /usr/local/lib/javalanche/javalanche.xml
+_provision virtualenvs /home/vagrant/.sdtvenv
+#_provision eclipse /usr/local/bin/eclipse
+# Finalizing
+_github
+_fixperms
+PROVISION
+
+Vagrant.configure("2") do |config|
+  config.vm.define :sdt do |sdt|
+	sdt.vm.box     = "precise32"
+	sdt.vm.box_url = "http://files.vagrantup.com/precise32.box"
+    sdt.vbguest.auto_update = false
+    sdt.vm.network :forwarded_port, guest: 8000, host: 8000
+    sdt.vm.network :forwarded_port, guest: 8081, host: 8081
+    sdt.vm.provision :shell, :inline => $functions + "\n" + $provision
+    sdt.ssh.forward_x11 = true
+  end
+end

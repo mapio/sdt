@@ -1,2 +1,2 @@
-curl -sL http://labs.consol.de/maven/repository/org/jolokia/jolokia-jvm/1.1.1/jolokia-jvm-1.1.1-agent.jar > /usr/share/java/jolokia.jar
+curl -sL https://oss.sonatype.org/content/repositories/releases/org/jolokia/jolokia-jvm/1.1.1/jolokia-jvm-1.1.1-agent.jar > /usr/share/java/jolokia.jar
 curl -sL https://oss.sonatype.org/content/repositories/releases/org/softee/pojo-mbean/1.1/pojo-mbean-1.1.jar > /usr/share/java/pojo-mbean.jar
