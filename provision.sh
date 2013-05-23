@@ -21,10 +21,11 @@ provision python3	/usr/bin/python3
 provision java7 	/usr/lib/jvm/java-7-oracle/jre/bin/java
 provision jython 	/usr/local/bin/jython
 provision mercurial /usr/local/bin/hg
-provision bash 		/home/vagrant/.bash_aliases
+provision userfiles /home/vagrant/.userfiles
 provision jars 		/usr/share/java/.sdt-jars
 provision daikon 	/usr/local/lib/daikon/README.txt
 provision javalanche /usr/local/lib/javalanche/javalanche.xml
+provision virtualenvs /home/vagrant/.sdtvenv
 #provision eclipse 	/usr/local/bin/eclipse
 
 # Provisioned via apt-get install
