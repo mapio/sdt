@@ -1,0 +1,39 @@
+<project name="Unit test example" default="test" basedir=".">
+
+	<property name="dest" value="target/classes" />
+	<property name="test.reports.dir" value="target/test-reports" />
+
+	<path id="cp">
+		<pathelement path="${dest}"/>
+		<pathelement location="/usr/share/java/junit4.jar"/>
+	</path>
+
+	<target name="compile">
+		<mkdir dir="${dest}"/>
+		<javac destdir="${dest}" debug="true">
+			<src>
+				<pathelement path="src/"/>
+			</src>
+			<classpath refid="cp" />
+		</javac>
+	</target>
+
+	<target name="clean">
+		<delete dir="target/"/>
+	</target>
+
+
+	<target name="test" depends="compile">
+		<mkdir dir="${test.reports.dir}"/>
+		<junit dir="./" failureproperty="test.failure" haltonerror="true" haltonfailure="true" printsummary="true" fork="true" forkmode="once">
+			<classpath refid="cp" />
+			<batchtest todir="${test.reports.dir}">
+				<fileset dir="src/test">
+					<include name="**/TestSuite.java"/>
+				</fileset>
+			</batchtest>
+			<formatter type="plain"/>
+		</junit>
+	</target>
+
+</project>
