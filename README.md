@@ -14,7 +14,7 @@ machine* image possible is provided.
 To setup such image on your *host* operating system you'll need to:
 
 * download and install [VirtualBox](https://www.virtualbox.org/), following the [instructions](https://www.virtualbox.org/manual/ch02.html) (there is no need to intsall the *extension pack*);
-* download and install [Vagrant](http://www.vagrantup.com/), following the [instructions](http://docs.vagrantup.com/v2/installation/index.html);
+* download and install [Vagrant](http://www.vagrantup.com/), following the [instructions](http://docs.vagrantup.com/v2/installation/index.html), and add the [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest) plugin;
 
 once such a basic Vagrant setup has been reached, move to an *empty directory*
 on the host filesystem and issue the command:
